@@ -8,6 +8,7 @@ export default function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const total = good + neutral + bad;
 
   const onLeaveFeedBack = (data) => {
     if(data === 'good'){
@@ -19,11 +20,11 @@ export default function App() {
   };
 
   const countTotalFeedback = () => {
-    return good + neutral + bad;       
+    return total;       
   };
 
   const countPositiveFeedback = () => {
-    return (good / (good + neutral + bad) * 100).toFixed(0); 
+    return (good / (total) * 100).toFixed(0); 
   };
 
   return (
@@ -39,7 +40,7 @@ export default function App() {
       <Section title="Please leave feedback">
         <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedBack={onLeaveFeedBack}/>   
       </Section>
-      { good + neutral + bad > 0 ?
+      { total > 0 ?
       <Section title="Statistics">
         <Statistics 
         good={good} 
